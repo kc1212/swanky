@@ -34,6 +34,20 @@ fn regex2captures<'t>(re: &Regex, line: &'t str) -> Result<Captures<'t>, Error> 
 }
 
 impl BinaryCircuit {
+    /// Swap the garbler's input with the evaluator's input.
+    pub fn swap_inputs(&mut self) -> Result<(), Error> {
+        if  self.num_garbler_inputs() != self.num_evaluator_inputs() {
+            return Err(Error::ParseGateError("unequal input lengths".to_string()));
+        }
+        let n = self.num_garbler_inputs();
+        for i in 0..n {
+            // TODO sanity check for the correct gate type
+            self.gates.swap(i, n+i);
+        }
+        std::mem::swap(&mut self.garbler_input_refs, &mut self.evaluator_input_refs);
+        Ok(())
+    }
+
     /// Generates a new `Circuit` from file `filename`. The file must follow the
     /// format given here: <https://homes.esat.kuleuven.be/~nsmart/MPC/old-circuits.html>,
     /// (Bristol Format---the OLD format---not Bristol Fashion---the NEW format) otherwise

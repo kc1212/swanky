@@ -12,22 +12,42 @@ publish.workspace = true
 version.workspace = true
 
 [features]
-exe = ["clap/derive"]
 ff = ["scuttlebutt/ff"]
 
 [dependencies]
+blake3.workspace = true
+crypto-bigint.workspace = true
 rand.workspace = true
-clap = {workspace = true, optional = true}
+clap.workspace = true
+eyre.workspace = true
 generic-array.workspace = true
 log.workspace = true
+mac-n-cheese-sieve-parser.workspace = true
 pretty_env_logger.workspace = true
 num-bigint.workspace = true
 num-traits.workspace = true
 scuttlebutt.workspace = true
+subtle.workspace = true
 ocelot.workspace = true
 zki_sieve.workspace = true
+flatbuffers.workspace = true
+nix.workspace = true
+
+[build-dependencies]
+swanky-flatbuffer-build.workspace = true
+
+[[example]]
+name = "network_edabits"
+path = "examples/network_edabits.rs"
+
+[[example]]
+name = "edabits"
+path = "examples/edabits.rs"
 
 [[bin]]
 name = "dietmc_zki"
-required-features = ["exe"]
 path = "bin/dietmc_zki.rs"
+
+[[bin]]
+name = "dietmc_0p"
+path = "bin/dietmc_0p.rs"

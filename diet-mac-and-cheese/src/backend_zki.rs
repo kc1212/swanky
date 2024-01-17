@@ -3,27 +3,26 @@ Implementation of ZKInterface `ZKBackend` trait.
 
 */
 
-use crate::backend::{
-    from_bytes_le, DietMacAndCheeseProver, DietMacAndCheeseVerifier, ValueProver, ValueVerifier,
-};
-use crate::error::Result as BResult;
+use crate::backend::{from_bytes_le, DietMacAndCheeseProver, DietMacAndCheeseVerifier};
+use crate::homcom::{MacProver, MacVerifier};
+use eyre::Result;
 use rand::{CryptoRng, Rng};
 use scuttlebutt::ring::FiniteRing;
 use scuttlebutt::{field::FiniteField, AbstractChannel};
 use zki_sieve::consumers::evaluator::ZKBackend;
 use zki_sieve::Result as ZkiResult;
 
-fn convert<T>(v: BResult<T>) -> ZkiResult<T> {
+fn convert<T>(v: Result<T>) -> ZkiResult<T> {
     match v {
-        BResult::Ok(x) => Ok(x),
-        BResult::Err(err) => Err(err.into()),
+        Result::Ok(x) => Ok(x),
+        Result::Err(err) => Err(err.into()),
     }
 }
 
 impl<FE: FiniteField, C: AbstractChannel, RNG: CryptoRng + Rng> ZKBackend
     for DietMacAndCheeseProver<FE, C, RNG>
 {
-    type Wire = ValueProver<FE>;
+    type Wire = MacProver<FE>;
 
     type FieldElement = FE::PrimeField;
 
@@ -103,7 +102,7 @@ impl<FE: FiniteField, C: AbstractChannel, RNG: CryptoRng + Rng> ZKBackend
 impl<FE: FiniteField, C: AbstractChannel, RNG: CryptoRng + Rng + Clone> ZKBackend
     for DietMacAndCheeseVerifier<FE, C, RNG>
 {
-    type Wire = ValueVerifier<FE>;
+    type Wire = MacVerifier<FE>;
 
     type FieldElement = FE::PrimeField;
 

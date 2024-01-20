@@ -156,6 +156,8 @@ macro_rules! call_with_big_finite_fields {
         #[cfg(feature = "ff")]
         $f::<$crate::field::F128p>($($arg),*);
         #[cfg(feature = "ff")]
+        $f::<$crate::field::F192p>($($arg),*);
+        #[cfg(feature = "ff")]
         $f::<$crate::field::F384p>($($arg),*);
         #[cfg(feature = "ff")]
         $f::<$crate::field::F384q>($($arg),*);
@@ -215,7 +217,7 @@ pub use f61p::F61p;
 mod prime_field_using_ff;
 #[cfg(feature = "ff")]
 pub use prime_field_using_ff::{
-    F128p, F256p, F384p, F384q, F400p, Fbls12381, Fbn254, Secp256k1, Secp256k1order,
+    F128p, F192p, F256p, F384p, F384q, F400p, Fbls12381, Fbn254, Secp256k1, Secp256k1order,
 };
 #[cfg(feature = "ff")]
 mod f2e19x3e26;

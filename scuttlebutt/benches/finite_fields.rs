@@ -92,6 +92,8 @@ finite_field_benchmarks!(f2e19x3e26, scuttlebutt::field::F2e19x3e26,);
 #[cfg(feature = "ff")]
 finite_field_benchmarks!(f128p, scuttlebutt::field::F128p,);
 #[cfg(feature = "ff")]
+finite_field_benchmarks!(f192p, scuttlebutt::field::F192p,);
+#[cfg(feature = "ff")]
 finite_field_benchmarks!(f256p, scuttlebutt::field::F256p,);
 #[cfg(feature = "ff")]
 finite_field_benchmarks!(f384p, scuttlebutt::field::F384p,);

@@ -357,6 +357,19 @@ prime_field_using_ff!(
 
 prime_field_using_ff!(
     /// The finite field over the prime
+    /// $`P = 2^{192} - 237`$.
+    F192p,
+    f192p,
+    modulus = "6277101735386680763835789423207666416102355444464034512659",
+    generator = "7",
+    limbs = 4,
+    actual_limbs = 3,
+    num_bytes = generic_array::typenum::U24,
+    num_bits = generic_array::typenum::U192,
+);
+
+prime_field_using_ff!(
+    /// The finite field over the prime
     /// $`P = 2^{256} - 2^{224} + 2^{192} + 2^{96} - 1
     ///     = 115792089210356248762697446949407573530086143415290314195533631308867097853951`$.
     F256p,

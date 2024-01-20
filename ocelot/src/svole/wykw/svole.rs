@@ -457,6 +457,8 @@ impl<FF: FiniteField> Malicious for Receiver<FF> {}
 #[cfg(test)]
 mod tests {
     use super::{Receiver, SVoleReceiver, SVoleSender, Sender, LPN_EXTEND_SMALL, LPN_SETUP_SMALL};
+    #[cfg(feature = "ff")]
+    use scuttlebutt::field::F192p;
     use scuttlebutt::{
         field::{F128b, F40b, F61p, FiniteField as FF},
         AesRng, Channel,
@@ -541,6 +543,12 @@ mod tests {
             let right = uws[i].0 * vole.delta() + vs[i];
             assert_eq!(uws[i].1, right);
         }
+    }
+
+    #[cfg(feature = "ff")]
+    #[test]
+    fn test_lpn_svole_f192p() {
+        test_lpn_svole_::<F192p, Sender<F192p>, Receiver<F192p>>();
     }
 
     #[test]
